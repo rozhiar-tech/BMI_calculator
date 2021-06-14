@@ -242,7 +242,9 @@ class BottomButton extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+              topRight: Radius.circular(10),
+              topLeft: Radius.circular(10),
+            ),
             color: Color(0xffeb1555),
           ),
           child: Center(
