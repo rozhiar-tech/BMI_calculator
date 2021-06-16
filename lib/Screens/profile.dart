@@ -1,8 +1,13 @@
+import 'package:BMIcalculator/Screens/workout_screen.dart';
 import 'package:BMIcalculator/model/meal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'input_page.dart';
+import 'package:intl/intl.dart';
+import 'package:animations/animations.dart';
 import 'package:vector_math/vector_math_64.dart' as math;
+
+import 'meal_detail_screen.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -10,12 +15,7 @@ class Profile extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    var hour = DateTime.now().hour;
-    var minute = DateTime.now().minute;
-    var seconds = DateTime.now().second;
-
-    var berlinWallFell = DateTime.utc(1989, 11, 9);
-    var moonLanding = DateTime.parse("1969-07-20 20:18:04Z");
+    var today = DateTime.now();
 
     return Scaffold(
       backgroundColor: const Color(0xFFe9e9e9),
@@ -87,7 +87,7 @@ class Profile extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       title: Text(
-                        "$hour :$minute :$seconds",
+                        "${DateFormat("EEEE").format(today)}, ${DateFormat("d MMMM").format(today)}",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w400,
@@ -114,9 +114,6 @@ class Profile extends StatelessWidget {
                           );
                         },
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,10 +167,6 @@ class Profile extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              'Protein',
-                              style: TextStyle(color: Colors.black54),
-                            ),
                             _IngredientProgress(
                               ingredient: "Protein",
                               progress: 0.3,
@@ -184,10 +177,6 @@ class Profile extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              'water',
-                              style: TextStyle(color: Colors.black54),
-                            ),
                             _IngredientProgress(
                               ingredient: "Carbs",
                               progress: 0.7,
@@ -197,10 +186,6 @@ class Profile extends StatelessWidget {
                             ),
                             SizedBox(
                               height: 3,
-                            ),
-                            Text(
-                              'Protein',
-                              style: TextStyle(color: Colors.black54),
                             ),
                             _IngredientProgress(
                               ingredient: "Fat",
@@ -262,118 +247,135 @@ class Profile extends StatelessWidget {
                     height: 10,
                   ),
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        bottom: 10,
-                        left: 32,
-                        right: 32,
-                      ),
-                      height: 2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            const Color(0XFF20008B),
-                            const Color(0XFF200087)
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0, left: 16),
-                            child: Text(
-                              "YOUR NEXT WORKOUT",
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                    child: OpenContainer(
+                        closedElevation: 0,
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        closedColor: const Color(0xFFE9E9E9),
+                        openBuilder: (context, _) {
+                          return WorkoutScreen();
+                        },
+                        closedBuilder: (context, VoidCallback openContainer) {
+                          return GestureDetector(
+                            onTap: openContainer,
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                bottom: 10,
+                                left: 32,
+                                right: 32,
                               ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0, left: 16),
-                            child: Text(
-                              "Upper Body",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 35,
+                              height: 2,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    const Color(0XFF20008B),
+                                    const Color(0XFF200087)
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(25)),
-                                      color: const Color(0xFF5B4D9D),
-                                    ),
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.asset(
-                                      "assets/chest.png",
-                                      width: 50,
-                                      height: 50,
-                                      color: Colors.white,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 16.0, left: 16),
+                                    child: Text(
+                                      "YOUR NEXT WORKOUT",
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 18,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                    color: const Color(0xFF5B4D9D),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 4.0, left: 16),
+                                    child: Text(
+                                      "Upper Body",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
                                   ),
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.asset(
-                                    "assets/back.png",
-                                    width: 50,
-                                    height: 50,
-                                    color: Colors.white,
+                                  Expanded(
+                                    child: Row(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          width: 35,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(25)),
+                                              color: const Color(0xFF5B4D9D),
+                                            ),
+                                            padding: const EdgeInsets.all(10),
+                                            child: Image.asset(
+                                              "assets/chest.png",
+                                              width: 50,
+                                              height: 50,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 18,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25)),
+                                            color: const Color(0xFF5B4D9D),
+                                          ),
+                                          padding: const EdgeInsets.all(10),
+                                          child: Image.asset(
+                                            "assets/back.png",
+                                            width: 50,
+                                            height: 50,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 18,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25)),
+                                            color: const Color(0xFF5B4D9D),
+                                          ),
+                                          padding: const EdgeInsets.all(10),
+                                          child: Image.asset(
+                                            "assets/biceps.png",
+                                            width: 50,
+                                            height: 50,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 18,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 18,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                    color: const Color(0xFF5B4D9D),
-                                  ),
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.asset(
-                                    "assets/biceps.png",
-                                    width: 50,
-                                    height: 50,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 18,
-                                )
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          );
+                        }),
                   ),
                 ],
               ),
@@ -409,6 +411,7 @@ class _IngredientProgress extends StatelessWidget {
           ingredient.toUpperCase(),
           style: TextStyle(
             fontSize: 14,
+            color: Colors.black54,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -439,6 +442,10 @@ class _IngredientProgress extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
+            Text(
+              "${leftAmount}g ",
+              style: TextStyle(color: Colors.black54),
+            ),
           ],
         ),
       ],
@@ -446,52 +453,7 @@ class _IngredientProgress extends StatelessWidget {
   }
 }
 
-class _RadialProgress extends StatelessWidget {
-  final double height, width, progress;
-
-  const _RadialProgress({Key key, this.height, this.width, this.progress})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _RadialPainter(
-        progress: 0.7,
-      ),
-      child: Container(
-        height: height,
-        width: width,
-        child: Center(
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "1731",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xFF200087),
-                  ),
-                ),
-                TextSpan(text: "\n"),
-                TextSpan(
-                  text: "kcal left",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF200087),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
+// ignore: unused_element
 class _RadialPainter extends CustomPainter {
   final double progress;
 
@@ -535,80 +497,90 @@ class _MealCard extends StatelessWidget {
         right: 20,
         bottom: 10,
       ),
-      child: Material(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        elevation: 4,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Flexible(
-                fit: FlexFit.tight,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  child: Image.asset(
-                    meal.imagePath,
-                    width: 150,
-                    fit: BoxFit.fill,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => MealDetailScreen(
+                      meal: meal,
+                    )),
+          );
+        },
+        child: Material(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          elevation: 4,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    child: Image.asset(
+                      meal.imagePath,
+                      width: 150,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 0,
-                      ),
-                      Text(
-                        meal.mealTime,
-                        style: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 13,
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 0,
                         ),
-                      ),
-                      Text(
-                        meal.name,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14),
-                      ),
-                      Text(
-                        "${meal.kiloCaloriesBurnt} kcl",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.access_time,
-                            size: 15,
-                            color: Colors.black54,
+                        Text(
+                          meal.mealTime,
+                          style: TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 13,
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "${meal.timeTaken} min",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16)
-                    ],
+                        ),
+                        Text(
+                          meal.name,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14),
+                        ),
+                        Text(
+                          "${meal.kiloCaloriesBurnt} kcl",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.access_time,
+                              size: 15,
+                              color: Colors.black54,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "${meal.timeTaken} min",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
