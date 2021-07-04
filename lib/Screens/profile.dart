@@ -10,7 +10,36 @@ import 'package:vector_math/vector_math_64.dart' as math;
 
 import 'meal_detail_screen.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (index) {
+        case 0:
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Profile();
+          }));
+          break;
+        case 1:
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return InputPage();
+          }));
+          break;
+        case 2:
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Profile();
+          }));
+          break;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -26,6 +55,7 @@ class Profile extends StatelessWidget {
         ),
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
+          type: BottomNavigationBarType.fixed,
           iconSize: 40,
           selectedIconTheme: IconThemeData(
             color: const Color(0xff0a0e21),
@@ -62,6 +92,9 @@ class Profile extends StatelessWidget {
               ),
             ),
           ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color(0xff0a0e21),
+          onTap: _onItemTapped,
         ),
       ),
       body: Stack(
