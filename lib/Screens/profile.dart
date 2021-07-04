@@ -3,6 +3,7 @@ import 'package:BMIcalculator/model/meal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'input_page.dart';
+import 'teachers.dart';
 import 'package:intl/intl.dart';
 import 'package:animations/animations.dart';
 import 'package:vector_math/vector_math_64.dart' as math;
@@ -145,7 +146,7 @@ class Profile extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => InputPage()),
+                                      builder: (context) => Teacher_Screen()),
                                 );
                               },
                             ),
@@ -497,90 +498,95 @@ class _MealCard extends StatelessWidget {
         right: 20,
         bottom: 10,
       ),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => MealDetailScreen(
+      child: Material(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        elevation: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Flexible(
+                fit: FlexFit.tight,
+                child: OpenContainer(
+                  closedShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  transitionDuration: const Duration(milliseconds: 1000),
+                  openBuilder: (context, _) {
+                    return MealDetailScreen(
                       meal: meal,
-                    )),
-          );
-        },
-        child: Material(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          elevation: 4,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    child: Image.asset(
-                      meal.imagePath,
-                      width: 150,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 0,
+                    );
+                  },
+                  closedBuilder: (context, openContainer) {
+                    return GestureDetector(
+                      onTap: openContainer,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: Image.asset(
+                          meal.imagePath,
+                          width: 150,
+                          fit: BoxFit.fill,
                         ),
-                        Text(
-                          meal.mealTime,
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 0,
+                      ),
+                      Text(
+                        meal.mealTime,
+                        style: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 13,
+                        ),
+                      ),
+                      Text(
+                        meal.name,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14),
+                      ),
+                      Text(
+                        "${meal.kiloCaloriesBurnt} kcl",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            size: 15,
+                            color: Colors.black54,
                           ),
-                        ),
-                        Text(
-                          meal.name,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14),
-                        ),
-                        Text(
-                          "${meal.kiloCaloriesBurnt} kcl",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.access_time,
-                              size: 15,
-                              color: Colors.black54,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              "${meal.timeTaken} min",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16)
-                      ],
-                    ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "${meal.timeTaken} min",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16)
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

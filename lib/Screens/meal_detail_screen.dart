@@ -106,7 +106,7 @@ class MealDetailScreen extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 14,
-                      color: Colors.blueGrey,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
@@ -126,6 +126,7 @@ class MealDetailScreen extends StatelessWidget {
                             meal.ingredients[i],
                             style: TextStyle(
                               fontSize: 16,
+                              color: Colors.black26,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -143,7 +144,7 @@ class MealDetailScreen extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 14,
-                      color: Colors.blueGrey,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
@@ -154,6 +155,7 @@ class MealDetailScreen extends StatelessWidget {
                     meal.preparation,
                     style: TextStyle(
                       fontSize: 16,
+                      color: Colors.black26,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
