@@ -7,12 +7,23 @@ import 'package:BMIcalculator/components/rounded_button.dart';
 import 'package:BMIcalculator/components/rounded_input_field.dart';
 import 'package:BMIcalculator/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key key,
   }) : super(key: key);
 
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  bool showSpinner = false;
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,17 +44,36 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Profile();
-                }));
+              press: () async {
+                setState(() {
+                  showSpinner = true;
+                });
+                try {
+                  final newUser = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+                  if (newUser != null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return Profile();
+                    }));
+                  }
+                  setState(() {
+                    showSpinner = false;
+                  });
+                } catch (e) {
+                  print(e);
+                }
               },
             ),
             SizedBox(height: size.height * 0.03),
