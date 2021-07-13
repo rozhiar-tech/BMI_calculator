@@ -1,3 +1,4 @@
+import 'package:BMIcalculator/Screens/SearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,177 +16,167 @@ class _Teacher_ScreenState extends State<Teacher_Screen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFe9e9e9),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20.0),
-              child: TextField(
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  hintText: "ناوی مامۆستاکە بنووسە",
-                  hintStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide.none),
-                ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SearchScreen();
+          }));
+        },
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Column(
-              children: [
-                Wrap(
-                  direction: Axis.horizontal,
-                  spacing: 15,
-                  runSpacing: 15,
-                  children: [
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 20,
+                    runSpacing: 20,
+                    children: [
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: width * 0.40,
-                      height: height * 0.20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/trainer.png'),
+                      Container(
+                        width: width * 0.40,
+                        height: height * 0.20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('assets/trainer.png'),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

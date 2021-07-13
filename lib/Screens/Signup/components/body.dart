@@ -1,4 +1,5 @@
 import 'package:BMIcalculator/Screens/profile.dart';
+import 'package:BMIcalculator/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:BMIcalculator/Screens/Login/login_screen.dart';
 import 'package:BMIcalculator/Screens/Signup/components/background.dart';
@@ -20,10 +21,12 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final _auth = FirebaseAuth.instance;
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   bool showSpinner = false;
   String email;
   String password;
+  String username;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,6 +45,12 @@ class _BodyState extends State<Body> {
               SvgPicture.asset(
                 "assets/icons/signup.svg",
                 height: size.height * 0.35,
+              ),
+              RoundedInputField(
+                hintText: "Your Username",
+                onChanged: (value) {
+                  username = value;
+                },
               ),
               RoundedInputField(
                 hintText: "Your Email",
@@ -63,7 +72,14 @@ class _BodyState extends State<Body> {
                   try {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
+                    var firebaseUser = FirebaseAuth.instance.currentUser;
+
                     if (newUser != null) {
+                      Map<String, String> userInfoMap = {
+                        "name": username,
+                      };
+                      databaseMethods.uploadUserInfo(
+                          userInfoMap, firebaseUser.uid);
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return Profile();

@@ -1,5 +1,7 @@
 import 'package:BMIcalculator/Screens/workout_screen.dart';
 import 'package:BMIcalculator/model/meal.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'input_page.dart';
@@ -10,6 +12,9 @@ import 'package:vector_math/vector_math_64.dart' as math;
 
 import 'meal_detail_screen.dart';
 
+User loggedInUser;
+String name;
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -17,6 +22,33 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   int _selectedIndex = 0;
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void getCureentUserId() {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    print(firebaseUser);
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(firebaseUser.uid)
+        .get()
+        .then((value) {
+      name = value.data().toString();
+    });
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -38,6 +70,13 @@ class _ProfileState extends State<Profile> {
           break;
       }
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCureentUserId();
   }
 
   @override
@@ -129,7 +168,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       subtitle: Text(
-                        "چۆنی، ڕۆژیار",
+                        "$name سڵاو ",
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 20,
