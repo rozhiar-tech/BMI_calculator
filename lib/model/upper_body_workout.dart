@@ -8,8 +8,8 @@ final upperBody = [
   [
     UpperBodyWorkout(
       imagePath: "assets/chest.png",
-      name: "Bench press",
-      instruction: "3 sets - 6 repitions",
+      name: "شناو",
+      instruction: "٣ سێت - ١٠ دوبارە بونەوە",
     ),
     UpperBodyWorkout(
       imagePath: "assets/chest.png",

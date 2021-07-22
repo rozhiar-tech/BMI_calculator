@@ -43,7 +43,7 @@ class WorkoutScreen extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "Upper Body",
+                  "بەشی سەرەوەی لەش",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 24,
@@ -64,7 +64,7 @@ class WorkoutScreen extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "60 mins",
+                          "٦٠ خولەک",
                           style: TextStyle(
                               color: Colors.white70,
                               fontWeight: FontWeight.w600,
@@ -73,7 +73,7 @@ class WorkoutScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 4,
+                      height: 2,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -86,7 +86,7 @@ class WorkoutScreen extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "Easy",
+                          "سەرتای",
                           style: TextStyle(
                               color: Colors.white70,
                               fontWeight: FontWeight.w600,

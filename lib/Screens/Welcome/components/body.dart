@@ -18,7 +18,8 @@ class Body extends StatelessWidget {
           children: <Widget>[
             Text(
               "بەخێر بێی بۆ ڕاهێنەر",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             SizedBox(height: size.height * 0.05),
             SvgPicture.asset(

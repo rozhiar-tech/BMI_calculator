@@ -33,12 +33,13 @@ class _BodyState extends State<Body> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "LOGIN",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              " ڕاهێنەر",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             SizedBox(height: size.height * 0.03),
-            SvgPicture.asset(
-              "assets/icons/login.svg",
+            Image(
+              image: AssetImage("assets/hey.jpg"),
               height: size.height * 0.35,
             ),
             SizedBox(height: size.height * 0.03),

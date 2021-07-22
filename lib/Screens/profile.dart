@@ -45,7 +45,9 @@ class _ProfileState extends State<Profile> {
         .doc(firebaseUser.uid)
         .get()
         .then((value) {
-      name = value.data().toString();
+      setState(() {
+        name = value.data().values.first.toString();
+      });
     });
   }
 
@@ -360,7 +362,7 @@ class _ProfileState extends State<Profile> {
                                     padding: const EdgeInsets.only(
                                         top: 16.0, left: 16),
                                     child: Text(
-                                      "YOUR NEXT WORKOUT",
+                                      "یاریە پێویستەکان",
                                       style: TextStyle(
                                         color: Colors.white70,
                                         fontSize: 16,
@@ -372,7 +374,7 @@ class _ProfileState extends State<Profile> {
                                     padding: const EdgeInsets.only(
                                         top: 4.0, left: 16),
                                     child: Text(
-                                      "Upper Body",
+                                      "یاریەکانی ڕۆژانە",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 24,

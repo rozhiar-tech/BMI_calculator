@@ -1,4 +1,5 @@
 import 'package:BMIcalculator/Screens/profile.dart';
+import 'package:BMIcalculator/helper/helperFunction.dart';
 import 'package:BMIcalculator/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:BMIcalculator/Screens/Login/login_screen.dart';
@@ -78,6 +79,7 @@ class _BodyState extends State<Body> {
                       Map<String, String> userInfoMap = {
                         "name": username,
                       };
+                      HelperFunctions.saveUserNameSharedPreference(username);
                       databaseMethods.uploadUserInfo(
                           userInfoMap, firebaseUser.uid);
                       Navigator.push(context,
@@ -130,24 +132,6 @@ class _BodyState extends State<Body> {
                   );
                 },
               ),
-              OrDivider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SocalIcon(
-                    iconSrc: "assets/icons/facebook.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "assets/icons/twitter.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "assets/icons/google-plus.svg",
-                    press: () {},
-                  ),
-                ],
-              )
             ],
           ),
         ),
