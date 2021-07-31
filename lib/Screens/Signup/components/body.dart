@@ -78,11 +78,13 @@ class _BodyState extends State<Body> {
                     if (newUser != null) {
                       Map<String, String> userInfoMap = {
                         "name": username,
+                        "email": email
                       };
                       HelperFunctions.saveUserNameSharedPreference(username);
+                      HelperFunctions.saveUserEmailSharedPreference(email);
                       databaseMethods.uploadUserInfo(
                           userInfoMap, firebaseUser.uid);
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return Profile();
                       }));
@@ -122,7 +124,7 @@ class _BodyState extends State<Body> {
               AlreadyHaveAnAccountCheck(
                 login: false,
                 press: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {

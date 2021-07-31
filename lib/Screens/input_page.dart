@@ -1,3 +1,5 @@
+import 'package:BMIcalculator/Screens/profile.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:BMIcalculator/components/icon_content.dart';
@@ -14,14 +16,64 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  int _selectedIndex = 0;
+
   Gender selectedGender;
   int height = 180;
   int weight = 30;
   int Age = 15;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (index) {
+        case 1:
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return Profile();
+          }));
+          break;
+
+        case 2:
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return Profile();
+          }));
+          break;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        buttonBackgroundColor: Colors.black,
+        backgroundColor: Colors.grey,
+        items: [
+          Icon(
+            Icons.calculate,
+            size: 22,
+            color: Colors.grey,
+          ),
+          Icon(
+            Icons.home,
+            size: 22,
+            color: Colors.grey,
+          ),
+          Icon(
+            Icons.account_box,
+            size: 22,
+            color: Colors.grey,
+          )
+        ],
+        height: 50,
+        animationDuration: Duration(milliseconds: 200),
+        animationCurve: Curves.bounceInOut,
+        index: _selectedIndex,
+        onTap: (index) {
+          _onItemTapped(index);
+        },
+      ),
       appBar: AppBar(
         title: Center(child: Text("BMI calculator")),
       ),
@@ -147,6 +199,9 @@ class _InputPageState extends State<InputPage> {
                               setState(
                                 () {
                                   weight = weight - 1;
+                                  if (weight < 0) {
+                                    weight = 1;
+                                  }
                                 },
                               );
                             },
@@ -187,6 +242,9 @@ class _InputPageState extends State<InputPage> {
                               changeState: () {
                                 setState(() {
                                   Age--;
+                                  if (Age < 0) {
+                                    Age = 1;
+                                  }
                                 });
                               },
                               icon: FontAwesomeIcons.minus,

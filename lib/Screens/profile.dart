@@ -1,3 +1,4 @@
+import 'package:BMIcalculator/Screens/personal_profile.dart';
 import 'package:BMIcalculator/Screens/workout_screen.dart';
 import 'package:BMIcalculator/model/meal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +10,7 @@ import 'teachers.dart';
 import 'package:intl/intl.dart';
 import 'package:animations/animations.dart';
 import 'package:vector_math/vector_math_64.dart' as math;
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'meal_detail_screen.dart';
 
@@ -21,7 +23,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -56,18 +58,15 @@ class _ProfileState extends State<Profile> {
       _selectedIndex = index;
       switch (index) {
         case 0:
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Profile();
-          }));
-          break;
-        case 1:
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
             return InputPage();
           }));
           break;
         case 2:
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Profile();
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return PersonalProfile();
           }));
           break;
       }
@@ -90,53 +89,33 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFe9e9e9),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(40),
-        ),
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          iconSize: 40,
-          selectedIconTheme: IconThemeData(
-            color: const Color(0xff0a0e21),
+      bottomNavigationBar: CurvedNavigationBar(
+        buttonBackgroundColor: Colors.black,
+        backgroundColor: Colors.grey,
+        items: [
+          Icon(
+            Icons.calculate,
+            size: 22,
+            color: Colors.grey,
           ),
-          unselectedIconTheme: IconThemeData(
-            color: Colors.black12,
+          Icon(
+            Icons.home,
+            size: 22,
+            color: Colors.grey,
           ),
-          items: [
-            BottomNavigationBarItem(
-              label: "Home",
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(
-                  Icons.home,
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Calculate",
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(
-                  Icons.calculate,
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Profile",
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Icon(
-                  Icons.person,
-                ),
-              ),
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: const Color(0xff0a0e21),
-          onTap: _onItemTapped,
-        ),
+          Icon(
+            Icons.account_box,
+            size: 22,
+            color: Colors.grey,
+          )
+        ],
+        height: 50,
+        animationDuration: Duration(milliseconds: 200),
+        animationCurve: Curves.bounceInOut,
+        index: _selectedIndex,
+        onTap: (index) {
+          _onItemTapped(index);
+        },
       ),
       body: Stack(
         children: [
@@ -185,7 +164,7 @@ class _ProfileState extends State<Profile> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => InputPage()),
+                                builder: (context) => PersonalProfile()),
                           );
                         },
                       ),
@@ -220,7 +199,7 @@ class _ProfileState extends State<Profile> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Teacher_Screen()),
+                                      builder: (context) => PersonalProfile()),
                                 );
                               },
                             ),

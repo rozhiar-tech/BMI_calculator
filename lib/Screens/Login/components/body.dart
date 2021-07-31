@@ -1,4 +1,7 @@
 import 'package:BMIcalculator/Screens/profile.dart';
+import 'package:BMIcalculator/helper/helperFunction.dart';
+import 'package:BMIcalculator/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:BMIcalculator/Screens/Login/components/background.dart';
 import 'package:BMIcalculator/Screens/Signup/signup_screen.dart';
@@ -20,6 +23,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  DatabaseMethods databaseMethods = DatabaseMethods();
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   String email;
@@ -61,16 +65,26 @@ class _BodyState extends State<Body> {
                   showSpinner = true;
                 });
                 try {
-                  final newUser = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-                  if (newUser != null) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Profile();
-                    }));
-                  }
-                  setState(() {
-                    showSpinner = false;
+                  final newUser = await _auth
+                      .signInWithEmailAndPassword(
+                          email: email, password: password)
+                      .then((value) async {
+                    if (value != null) {
+                      QuerySnapshot userinfosnapshot =
+                          await databaseMethods.getUserInfo(email);
+                      HelperFunctions.saveUserLoggedInSharedPreference(true);
+                      HelperFunctions.saveUserNameSharedPreference(
+                          userinfosnapshot.docs[0].get('name'));
+                      HelperFunctions.saveUserEmailSharedPreference(
+                          userinfosnapshot.docs[0].get('name'));
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Profile();
+                      }));
+                    }
+                    setState(() {
+                      showSpinner = false;
+                    });
                   });
                 } catch (e) {
                   print(e);
