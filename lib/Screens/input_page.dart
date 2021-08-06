@@ -48,7 +48,7 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.black,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         items: [
           Icon(
             Icons.calculate,

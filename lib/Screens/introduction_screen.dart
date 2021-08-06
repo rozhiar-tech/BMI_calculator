@@ -81,6 +81,7 @@ class _IntroductionState extends State<Introduction> {
         showNextButton: false,
         showDoneButton: true,
         showSkipButton: false,
+
         onDone: () {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {

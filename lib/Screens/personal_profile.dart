@@ -38,7 +38,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
       backgroundColor: Colors.white,
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.black,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         items: [
           Icon(
             Icons.calculate,
@@ -70,7 +70,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
           "بەمزوانە بەردەست دەبێت",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 40,
+            fontSize: 30,
             color: Colors.black,
           ),
         )),

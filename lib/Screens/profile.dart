@@ -78,6 +78,13 @@ class _ProfileState extends State<Profile> {
     // TODO: implement initState
     super.initState();
     getCureentUserId();
+    onRefresh(_auth.currentUser);
+  }
+
+  onRefresh(userCard) {
+    setState(() {
+      loggedInUser = userCard;
+    });
   }
 
   @override
@@ -91,7 +98,7 @@ class _ProfileState extends State<Profile> {
       backgroundColor: const Color(0xFFe9e9e9),
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.black,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         items: [
           Icon(
             Icons.calculate,
@@ -304,7 +311,7 @@ class _ProfileState extends State<Profile> {
                     child: OpenContainer(
                         closedElevation: 0,
                         transitionType: ContainerTransitionType.fade,
-                        transitionDuration: const Duration(milliseconds: 1000),
+                        transitionDuration: const Duration(milliseconds: 500),
                         closedColor: const Color(0xFFE9E9E9),
                         openBuilder: (context, _) {
                           return WorkoutScreen();
@@ -568,7 +575,7 @@ class _MealCard extends StatelessWidget {
                 child: OpenContainer(
                   closedShape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  transitionDuration: const Duration(milliseconds: 1000),
+                  transitionDuration: const Duration(milliseconds: 500),
                   openBuilder: (context, _) {
                     return MealDetailScreen(
                       meal: meal,
@@ -597,22 +604,12 @@ class _MealCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: 0,
-                      ),
                       Text(
                         meal.mealTime,
                         style: TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 13,
                         ),
-                      ),
-                      Text(
-                        meal.name,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14),
                       ),
                       Text(
                         "${meal.kiloCaloriesBurnt} kcl",
@@ -626,7 +623,7 @@ class _MealCard extends StatelessWidget {
                             color: Colors.black54,
                           ),
                           SizedBox(
-                            width: 5,
+                            width: 2,
                           ),
                           Text(
                             "${meal.timeTaken} min",
@@ -634,7 +631,7 @@ class _MealCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16)
+                      SizedBox(height: 10)
                     ],
                   ),
                 ),

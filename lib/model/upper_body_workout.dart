@@ -13,25 +13,25 @@ final upperBody = [
     ),
     UpperBodyWorkout(
       imagePath: "assets/chest.png",
-      name: "Dumbell press",
-      instruction: "4 sets - 6 repitions",
+      name: "یاری ورگ",
+      instruction: "٤ سێت ٢٥ دوبارە بوونەوەو",
     ),
     UpperBodyWorkout(
       imagePath: "assets/chest.png",
-      name: "Dips",
-      instruction: "2 sets - 10 repitions",
+      name: "خۆ هەڵواسین",
+      instruction: "٤ سێت ١٠ دووبارە بوونەوە",
     ),
   ],
   [
     UpperBodyWorkout(
       imagePath: "assets/back.png",
-      name: "Pull ups",
-      instruction: "2 sets - 8 repitions",
+      name: "خۆ هەڵواسین",
+      instruction: "٤ سێت ١٠ دووبارە بوونەوە",
     ),
     UpperBodyWorkout(
       imagePath: "assets/back.png",
-      name: "Deadlift",
-      instruction: "2 sets - 4 repitions",
+      name: "سکواد",
+      instruction: "٤ سێت ١٥ دووبارە بوونەوە",
     ),
     UpperBodyWorkout(
       imagePath: "assets/back.png",

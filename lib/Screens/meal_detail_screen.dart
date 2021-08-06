@@ -49,7 +49,7 @@ class MealDetailScreen extends StatelessWidget {
                     meal.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
-                      fontSize: 24,
+                      fontSize: 19,
                       color: Colors.black,
                     ),
                   ),
@@ -60,19 +60,19 @@ class MealDetailScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           SizedBox(
-                            width: 30,
+                            width: 25,
                           ),
                           Text(
                             "${meal.kiloCaloriesBurnt} kcal",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 16),
+                                fontSize: 15),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 4,
+                        height: 2,
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.min,
@@ -82,7 +82,7 @@ class MealDetailScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                           SizedBox(
-                            width: 5,
+                            width: 2,
                           ),
                           Text(
                             "${meal.timeTaken} mins",
@@ -102,7 +102,7 @@ class MealDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    "INGREDIENTS",
+                    "پێکهاتەکان",
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 14,
@@ -140,7 +140,7 @@ class MealDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    "PREPARATION",
+                    "دروست کردنی",
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 14,

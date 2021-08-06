@@ -72,11 +72,12 @@ class _BodyState extends State<Body> {
                     if (value != null) {
                       QuerySnapshot userinfosnapshot =
                           await databaseMethods.getUserInfo(email);
-                      HelperFunctions.saveUserLoggedInSharedPreference(true);
                       HelperFunctions.saveUserNameSharedPreference(
                           userinfosnapshot.docs[0].get('name'));
                       HelperFunctions.saveUserEmailSharedPreference(
                           userinfosnapshot.docs[0].get('name'));
+                      HelperFunctions.saveUserLoggedInSharedPreference(true);
+
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
                         return Profile();
